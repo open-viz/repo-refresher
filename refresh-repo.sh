@@ -5,10 +5,12 @@ SCRIPT_ROOT=$(realpath $(dirname "${BASH_SOURCE[0]}"))
 SCRIPT_NAME=$(basename "${BASH_SOURCE[0]}")
 
 GITHUB_USER=${GITHUB_USER:-1gtm}
-PR_BRANCH=generic-repo-refresher # -$(date +%s)
-COMMIT_MSG="Update repository config"
+PR_BRANCH=kubedb-api-refresher # -$(date +%s)
+COMMIT_MSG="Update KubeDB api"
 
-REPO_ROOT=/tmp/generic-repo-refresher
+REPO_ROOT=/tmp/kubedb-api-refresher
+
+KUBEDB_API_REF=${KUBEDB_API_REF:-master}
 
 refresh() {
     echo "refreshing repository: $1"
@@ -18,20 +20,9 @@ refresh() {
     git clone --no-tags --no-recurse-submodules --depth=1 https://${GITHUB_USER}:${GITHUB_TOKEN}@$1.git
     cd $(ls -b1)
     git checkout -b $PR_BRANCH
-    sed -i 's/busybox:1.31.1/busybox:latest/g' Makefile
-    sed -i 's/alpine:3.11/alpine:latest/g' Makefile
-    sed -i 's/alpine:3.10/alpine:latest/g' Makefile
-    sed -i 's/debian:stretch/debian:buster/g' Makefile
-    sed -i 's/gcr.io\/distroless\/base/gcr.io\/distroless\/base-debian10/g' Makefile
-    sed -i 's/gcr.io\/distroless\/base-debian10-debian10/gcr.io\/distroless\/base-debian10/g' Makefile
-    sed -i 's/gcr.io\/distroless\/static/gcr.io\/distroless\/static-debian10/g' Makefile
-    sed -i 's/gcr.io\/distroless\/static-debian10-debian10/gcr.io\/distroless\/static-debian10/g' Makefile
-    sed -i 's/chart-testing:v3.0.0-rc.1/chart-testing:v3.0.0/g' Makefile
-    sed -i 's/?=\ 1.14/?=\ 1.15/g' Makefile
-    pushd .github/workflows/
-    sed -i 's/Go\ 1.14/Go 1.15/g' *
-    sed -i 's/go-version:\ 1.14/go-version:\ 1.15/g' *
-    popd
+    go mod edit -require kubedb.dev/apimachinery@${KUBEDB_API_REF}
+    go mod tidy
+    go mod vendor
     [ -z "$2" ] || (
         echo "$2"
         $2 || true
