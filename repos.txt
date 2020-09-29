@@ -12,4 +12,5 @@ github.com/kubedb/pgbouncer
 github.com/kubedb/postgres
 github.com/kubedb/proxysql
 github.com/kubedb/redis
+github.com/kubedb/tests
 github.com/appscode/kubedb-enterprise
