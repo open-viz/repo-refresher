@@ -12,6 +12,16 @@ REPO_ROOT=/tmp/kubedb-api-refresher
 
 KUBEDB_API_REF=${KUBEDB_API_REF:-master}
 
+repo_uptodate() {
+    # gomodfiles=(go.mod go.sum vendor/modules.txt)
+    gomodfiles=(go.sum vendor/modules.txt)
+    changed=($(git diff --name-only))
+    changed+=("${gomodfiles[@]}")
+    # https://stackoverflow.com/a/28161520
+    diff=($(echo ${changed[@]} ${gomodfiles[@]} | tr ' ' '\n' | sort | uniq -u))
+    return ${#diff[@]}
+}
+
 refresh() {
     echo "refreshing repository: $1"
     rm -rf $REPO_ROOT
@@ -26,11 +36,13 @@ refresh() {
     [ -z "$2" ] || (
         echo "$2"
         $2 || true
+        # run an extra make fmt because when make gen fails, make fmt is not run
+        make fmt || true
     )
-    git add --all
-    if git diff --exit-code -s HEAD; then
+    if repo_uptodate; then
         echo "Repository $1 is up-to-date."
     else
+        git add --all
         if [[ "$1" == *"stashed"* ]]; then
             git commit -a -s -m "$COMMIT_MSG" -m "/cherry-pick"
         else
