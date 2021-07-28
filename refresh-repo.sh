@@ -34,6 +34,7 @@ refresh() {
         if [ "$1" != "github.com/kubedb/apimachinery" ]; then
             go mod edit \
                 -require kubedb.dev/apimachinery@${KUBEDB_API_REF}
+            go mod tidy
         fi
         go mod edit \
             -require=kmodules.xyz/client-go@dd0503cf99cf3b6abb635d8945a8d7d8fed901d9 \
