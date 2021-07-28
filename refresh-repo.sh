@@ -5,10 +5,10 @@ SCRIPT_ROOT=$(realpath $(dirname "${BASH_SOURCE[0]}"))
 SCRIPT_NAME=$(basename "${BASH_SOURCE[0]}")
 
 GITHUB_USER=${GITHUB_USER:-1gtm}
-PR_BRANCH=kubedb-api-refresher # -$(date +%s)
-COMMIT_MSG="Update KubeDB api"
+PR_BRANCH=kubedb-repo-refresher # -$(date +%s)
+COMMIT_MSG="Update dependencies"
 
-REPO_ROOT=/tmp/kubedb-api-refresher
+REPO_ROOT=/tmp/kubedb-repo-refresher
 
 KUBEDB_API_REF=${KUBEDB_API_REF:-master}
 
@@ -30,9 +30,22 @@ refresh() {
     git clone --no-tags --no-recurse-submodules --depth=1 https://${GITHUB_USER}:${GITHUB_TOKEN}@$1.git
     cd $(ls -b1)
     git checkout -b $PR_BRANCH
-    go mod edit -require kubedb.dev/apimachinery@${KUBEDB_API_REF}
-    go mod tidy
-    go mod vendor
+    if [ -f go.mod ]; then
+        if [ "$1" != "github.com/kubedb/apimachinery" ]; then
+            go mod edit \
+                -require kubedb.dev/apimachinery@${KUBEDB_API_REF}
+        fi
+        go mod edit \
+            -require=kmodules.xyz/client-go@dd0503cf99cf3b6abb635d8945a8d7d8fed901d9 \
+            -require=kmodules.xyz/webhook-runtime@e489faf01981d2f3afa671989388c7b6f22b6baa \
+            -require=kmodules.xyz/resource-metadata@dcc1abc08aa00646b9474f7702b45c798b3ce66c \
+            -require=kmodules.xyz/custom-resources@83db827677cf5651491478fa85707d62416cf679 \
+            -replace=github.com/satori/go.uuid=github.com/gofrs/uuid@v4.0.0+incompatible \
+            -replace=helm.sh/helm/v3=github.com/kubepack/helm/v3@v3.6.1-0.20210518225915-c3e0ce48dd1b \
+            -replace=k8s.io/apiserver=github.com/kmodules/apiserver@v0.21.2-0.20210716212718-83e5493ac170
+        go mod tidy
+        go mod vendor
+    fi
     [ -z "$2" ] || (
         echo "$2"
         $2 || true
