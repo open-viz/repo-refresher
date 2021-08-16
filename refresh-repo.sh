@@ -10,7 +10,7 @@ COMMIT_MSG="Update dependencies"
 
 REPO_ROOT=/tmp/kubedb-repo-refresher
 
-KUBEDB_API_REF=${KUBEDB_API_REF:-3327d4c103dfe523de90768ccda5760f79ba075a}
+KUBEDB_API_REF=${KUBEDB_API_REF:-a3581bc6b2690dbed233a37bb52a134a4ade6112}
 
 repo_uptodate() {
     # gomodfiles=(go.mod go.sum vendor/modules.txt)
