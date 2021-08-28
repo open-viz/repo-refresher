@@ -10,7 +10,7 @@ COMMIT_MSG="Update dependencies"
 
 REPO_ROOT=/tmp/kubedb-repo-refresher
 
-KUBEDB_API_REF=${KUBEDB_API_REF:-a8eb885ccaa2f2f6b29c2022d5662132f2af0508}
+KUBEDB_API_REF=${KUBEDB_API_REF:-356e942f35d19393000c4e234eded1c2e3acc762}
 
 repo_uptodate() {
     # gomodfiles=(go.mod go.sum vendor/modules.txt)
@@ -38,7 +38,7 @@ refresh() {
         fi
         go mod edit \
             -require=kmodules.xyz/client-go@54ead9c6225fd51239935aeedbbb61ec85a3e91f \
-            -require=kmodules.xyz/monitoring-agent-api@d00b079c067bbc1a23e898e4fbd10a95f6ca9f0b \
+            -require=kmodules.xyz/monitoring-agent-api@78a792a84818f53173518dbe81c1fc587db3a1cd \
             -require=kmodules.xyz/webhook-runtime@5c602fd5cf06e13243a079a7cbd5dc50b9059b08 \
             -require=kmodules.xyz/resource-metadata@ed8d9b48f9162a40f083d31dc94c994dbcb85fc2 \
             -require=kmodules.xyz/custom-resources@e5a3d2d6c161773e8630bdc5e57e35e0b5330da1 \
