@@ -6,11 +6,11 @@ SCRIPT_NAME=$(basename "${BASH_SOURCE[0]}")
 
 GITHUB_USER=${GITHUB_USER:-1gtm}
 PR_BRANCH=kubedb-repo-refresher # -$(date +%s)
-COMMIT_MSG="Update dependencies"
+COMMIT_MSG="Log warning if Community License is used with non-demo namespace"
 
 REPO_ROOT=/tmp/kubedb-repo-refresher
 
-KUBEDB_API_REF=${KUBEDB_API_REF:-76460f615ab2d01f5986a2ff7c3f1f647fb046c1}
+KUBEDB_API_REF=${KUBEDB_API_REF:-84659c4a8fca93d11c70737921b60df8bc58e18c}
 
 repo_uptodate() {
     # gomodfiles=(go.mod go.sum vendor/modules.txt)
@@ -37,7 +37,7 @@ refresh() {
             go mod tidy
         fi
         go mod edit \
-            -require=kmodules.xyz/client-go@15cac6c74063a9893fe295f4f8bd749b00558ca2 \
+            -require=kmodules.xyz/client-go@f005c6dfcb323e650d7b4ef61b2588686c2b9f57 \
             -require=kmodules.xyz/monitoring-agent-api@0323c6034f702a930f63a38e52dd7535b3534622 \
             -require=kmodules.xyz/webhook-runtime@f6ab57afa7e47c6379d41bfefda37e260e7274c3 \
             -require=kmodules.xyz/resource-metadata@8f6a3d706da589c610fd36f90a2fd1277bfc45c5 \
