@@ -8,13 +8,15 @@ github.com/kubedb/mariadb-coordinator
 github.com/kubedb/memcached
 github.com/kubedb/mongodb
 github.com/kubedb/mysql
+github.com/kubedb/mysql-coordinator
 github.com/kubedb/mysql-router-init
 github.com/kubedb/operator
 github.com/kubedb/percona-xtradb
-github.com/kubedb/pgbouncer
 github.com/kubedb/pg-coordinator
+github.com/kubedb/pgbouncer
 github.com/kubedb/postgres
 github.com/kubedb/proxysql
 github.com/kubedb/redis
+github.com/kubedb/redis-coordinator
 github.com/kubedb/replication-mode-detector
 github.com/kubedb/tests
