@@ -47,6 +47,7 @@ refresh() {
             -require=go.bytebuilders.dev/license-verifier/kubernetes@v0.9.3 \
             -require=go.bytebuilders.dev/audit@v0.0.10 \
             -require=gomodules.xyz/x@v0.0.8 \
+            -require=gomodules.xyz/logs@v0.0.6 \
             -replace=github.com/satori/go.uuid=github.com/gofrs/uuid@v4.0.0+incompatible \
             -replace=github.com/dgrijalva/jwt-go=github.com/gomodules/jwt@v3.2.2+incompatible \
             -replace=github.com/golang-jwt/jwt=github.com/golang-jwt/jwt@v3.2.2+incompatible \
