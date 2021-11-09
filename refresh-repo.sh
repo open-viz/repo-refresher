@@ -6,11 +6,11 @@ SCRIPT_NAME=$(basename "${BASH_SOURCE[0]}")
 
 GITHUB_USER=${GITHUB_USER:-1gtm}
 PR_BRANCH=kubedb-repo-refresher # -$(date +%s)
-COMMIT_MSG="Update dependencies"
+COMMIT_MSG="Support custom pod and controller labels"
 
 REPO_ROOT=/tmp/kubedb-repo-refresher
 
-KUBEDB_API_REF=${KUBEDB_API_REF:-47b42be0bc352a821aa4e67830a0437ed6968961}
+KUBEDB_API_REF=${KUBEDB_API_REF:-bbd2a36b4e8d15ff477805463f5067ae81e2867d}
 
 repo_uptodate() {
     # gomodfiles=(go.mod go.sum vendor/modules.txt)
@@ -37,15 +37,15 @@ refresh() {
             go mod tidy
         fi
         go mod edit \
-            -require=kmodules.xyz/client-go@0cf6ea46b0306b255a82f14b00b374027b0e9192 \
+            -require=kmodules.xyz/client-go@5bb4090d2728ba8df44a343336ad97769cba5a99 \
             -require=kmodules.xyz/monitoring-agent-api@38ca075a2dbde85cf48d84b699720925066a5f3a \
             -require=kmodules.xyz/webhook-runtime@7f73c2ab318a43feb61f11696815d2abdc745af1 \
             -require=kmodules.xyz/resource-metadata@v0.6.7 \
             -require=kmodules.xyz/custom-resources@72bd9e8cae6e8ca708e6e716bef12a2f58f60b96 \
             -require=kmodules.xyz/objectstore-api@fdf68f88ea6e6b92a3c31339128b3551e2bc9742 \
-            -require=go.bytebuilders.dev/license-verifier@v0.9.3 \
-            -require=go.bytebuilders.dev/license-verifier/kubernetes@v0.9.3 \
-            -require=go.bytebuilders.dev/audit@v0.0.11 \
+            -require=go.bytebuilders.dev/license-verifier@v0.9.4 \
+            -require=go.bytebuilders.dev/license-verifier/kubernetes@v0.9.4 \
+            -require=go.bytebuilders.dev/audit@v0.0.12 \
             -require=gomodules.xyz/x@v0.0.8 \
             -require=gomodules.xyz/logs@v0.0.6 \
             -replace=github.com/satori/go.uuid=github.com/gomodules/uuid@v4.0.0+incompatible \
