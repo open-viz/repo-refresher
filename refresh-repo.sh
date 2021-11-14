@@ -6,11 +6,11 @@ SCRIPT_NAME=$(basename "${BASH_SOURCE[0]}")
 
 GITHUB_USER=${GITHUB_USER:-1gtm}
 PR_BRANCH=kubedb-repo-refresher # -$(date +%s)
-COMMIT_MSG="Support custom pod and controller labels"
+COMMIT_MSG="Update license-verifier"
 
 REPO_ROOT=/tmp/kubedb-repo-refresher
 
-KUBEDB_API_REF=${KUBEDB_API_REF:-bbd2a36b4e8d15ff477805463f5067ae81e2867d}
+KUBEDB_API_REF=${KUBEDB_API_REF:-1222a1d628030492d26bedc906068719752a87a4}
 
 repo_uptodate() {
     # gomodfiles=(go.mod go.sum vendor/modules.txt)
@@ -37,14 +37,15 @@ refresh() {
             go mod tidy
         fi
         go mod edit \
-            -require=kmodules.xyz/client-go@5bb4090d2728ba8df44a343336ad97769cba5a99 \
-            -require=kmodules.xyz/monitoring-agent-api@38ca075a2dbde85cf48d84b699720925066a5f3a \
-            -require=kmodules.xyz/webhook-runtime@7f73c2ab318a43feb61f11696815d2abdc745af1 \
+            -require=kmodules.xyz/client-go@091bd089a92dd44e734ad5ccc3fef72fc8a1043b \
+            -require=kmodules.xyz/monitoring-agent-api@ca48f83c44c5e0bfd46a580e73eeac18e2bd2d4b \
+            -require=kmodules.xyz/webhook-runtime@ac7adedbd68016478ad656b8b751775142351be3 \
             -require=kmodules.xyz/resource-metadata@v0.6.7 \
-            -require=kmodules.xyz/custom-resources@72bd9e8cae6e8ca708e6e716bef12a2f58f60b96 \
-            -require=kmodules.xyz/objectstore-api@fdf68f88ea6e6b92a3c31339128b3551e2bc9742 \
-            -require=go.bytebuilders.dev/license-verifier@v0.9.4 \
-            -require=go.bytebuilders.dev/license-verifier/kubernetes@v0.9.4 \
+            -require=kmodules.xyz/custom-resources@7ab2db03cce8470a57f13cdb89a1ee5b47f2df7d \
+            -require=kmodules.xyz/objectstore-api@b9135743b78beee7af03b309c36ac18294943600 \
+            -require=kmodules.xyz/offshoot-api@3e217667cf417e3fa8a935f422c9053f6feac830 \
+            -require=go.bytebuilders.dev/license-verifier@v0.9.5 \
+            -require=go.bytebuilders.dev/license-verifier/kubernetes@v0.9.5 \
             -require=go.bytebuilders.dev/audit@v0.0.12 \
             -require=gomodules.xyz/x@v0.0.8 \
             -require=gomodules.xyz/logs@v0.0.6 \
