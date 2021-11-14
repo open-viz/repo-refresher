@@ -6,11 +6,11 @@ SCRIPT_NAME=$(basename "${BASH_SOURCE[0]}")
 
 GITHUB_USER=${GITHUB_USER:-1gtm}
 PR_BRANCH=kubedb-repo-refresher # -$(date +%s)
-COMMIT_MSG="Update license-verifier"
+COMMIT_MSG="Use DisableAnalytics flag from license"
 
 REPO_ROOT=/tmp/kubedb-repo-refresher
 
-KUBEDB_API_REF=${KUBEDB_API_REF:-1222a1d628030492d26bedc906068719752a87a4}
+KUBEDB_API_REF=${KUBEDB_API_REF:-1969d04c0945a0b9f69f18308912519588834481}
 
 repo_uptodate() {
     # gomodfiles=(go.mod go.sum vendor/modules.txt)
