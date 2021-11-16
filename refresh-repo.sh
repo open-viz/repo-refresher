@@ -5,12 +5,12 @@ SCRIPT_ROOT=$(realpath $(dirname "${BASH_SOURCE[0]}"))
 SCRIPT_NAME=$(basename "${BASH_SOURCE[0]}")
 
 GITHUB_USER=${GITHUB_USER:-1gtm}
-PR_BRANCH=kubedb-repo-refresher # -$(date +%s)
-COMMIT_MSG="Use DisableAnalytics flag from license"
+PR_BRANCH=openviz-repo-refresher # -$(date +%s)
+COMMIT_MSG="Use dependencies"
 
-REPO_ROOT=/tmp/kubedb-repo-refresher
+REPO_ROOT=/tmp/openviz-repo-refresher
 
-KUBEDB_API_REF=${KUBEDB_API_REF:-1969d04c0945a0b9f69f18308912519588834481}
+# KUBEDB_API_REF=${KUBEDB_API_REF:-1969d04c0945a0b9f69f18308912519588834481}
 
 repo_uptodate() {
     # gomodfiles=(go.mod go.sum vendor/modules.txt)
@@ -31,11 +31,11 @@ refresh() {
     cd $(ls -b1)
     git checkout -b $PR_BRANCH
     if [ -f go.mod ]; then
-        if [ "$1" != "github.com/kubedb/apimachinery" ]; then
-            go mod edit \
-                -require kubedb.dev/apimachinery@${KUBEDB_API_REF}
-            go mod tidy
-        fi
+        # if [ "$1" != "github.com/kubedb/apimachinery" ]; then
+        #     go mod edit \
+        #         -require kubedb.dev/apimachinery@${KUBEDB_API_REF}
+        #     go mod tidy
+        # fi
         go mod edit \
             -require=kmodules.xyz/client-go@091bd089a92dd44e734ad5ccc3fef72fc8a1043b \
             -require=kmodules.xyz/monitoring-agent-api@ca48f83c44c5e0bfd46a580e73eeac18e2bd2d4b \
