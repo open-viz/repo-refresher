@@ -1,2 +1,4 @@
-github.com/open-viz/grafana-operator
-github.com/open-viz/installer
+open-viz/apimachinery
+open-viz/grafana-tools
+open-viz/installer
+open-viz/trickster-config
