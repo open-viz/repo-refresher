@@ -8,7 +8,7 @@ GITHUB_USER=${GITHUB_USER:-1gtm}
 PR_BRANCH=go122 # -$(date +%s)
 COMMIT_MSG="Use Go 1.22"
 
-REPO_ROOT=/tmp/kmod-repo-refresher
+REPO_ROOT=/tmp/ov-repo-refresher
 
 API_REF=${API_REF:-c5efabadb}
 
