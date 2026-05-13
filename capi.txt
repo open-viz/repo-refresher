@@ -1,0 +1,8 @@
+kluster-api/aws-credential-manager
+kluster-api/capa-vpc-peering-operator
+kluster-api/capi-config
+kluster-api/capi-deployer
+kluster-api/capi-ops-manager
+kluster-api/docker-machine-operator
+kluster-api/gcp-credential-manager
+kluster-api/installer
